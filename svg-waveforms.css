@@ -1,0 +1,42 @@
+body {
+  background-color: #ddd;
+}
+
+.parameters {
+  margin: 5px 0px 5px 0px;
+}
+
+input[type="number"] {
+  width: 70px;
+}
+
+input[type="color"] {
+  width: 70px;
+}
+
+.well {
+  display: inline-block;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#wave-selector-saw, #wave-selector-square, #wave-selector-triangle {
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#wave-selector-saw {
+  background-image: url(saw.svg);
+}
+
+#wave-selector-square {
+  background-image: url(square.svg);
+}
+
+#wave-selector-triangle {
+  background-image: url(triangle.svg);
+}
