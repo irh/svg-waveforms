@@ -21,7 +21,7 @@ function Model() {
   self.height = ko.observable(300);
 
   self.harmonics = ko.pureComputed(function() {
-    var harmonics_count = (self.shape() !== 'saw')
+    var harmonics_count = (self.shape() === 'saw')
       ? self.harmonicCount()
       : self.harmonicCount() * 2;
 
