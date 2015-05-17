@@ -36,13 +36,13 @@ input[type="color"] {
 }
 
 #wave-selector-saw {
-  background-image: url(saw.svg);
+  background-image: url(images/saw.svg);
 }
 
 #wave-selector-square {
-  background-image: url(square.svg);
+  background-image: url(images/square.svg);
 }
 
 #wave-selector-triangle {
-  background-image: url(triangle.svg);
+  background-image: url(images/triangle.svg);
 }
