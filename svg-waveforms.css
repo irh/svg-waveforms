@@ -22,6 +22,12 @@ input[type="color"] {
   padding: 20px;
 }
 
+.navbar-img {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 20px;
+}
+
 #wave-selector-saw, #wave-selector-square, #wave-selector-triangle {
   background-repeat: no-repeat;
   background-position: center;
