@@ -112,6 +112,7 @@ function Model() {
 $(document).ready(function() {
   var model = new Model();
   ko.applyBindings(model);
+  ko.persistChanges(model, "model-");
 
   var self = this;
   self.download_url = null;
@@ -123,3 +124,4 @@ $(document).ready(function() {
     $("#download").attr("href", self.download_url);
   });
 });
+
