@@ -49,13 +49,11 @@ function Model() {
     });
   }, self);
 
-  self.sizeX = ko.pureComputed(function() {
-    return Math.round(self.width() * self.oversampling());
-  }, self);
-
   self.wave = ko.pureComputed(function() {
-    return _.map(_.range(0, self.sizeX()), function(sample) {
-      var sample_phase = sample / (self.sizeX() - 1)
+    var sizeX = Math.round(self.width() * self.oversampling());
+
+    return _.map(_.range(0, sizeX), function(sample) {
+      var sample_phase = sample / (sizeX - 1)
       return {
         x: sample_phase,
         y:_.reduce(self.harmonics(), function(memo, harmonic, harmonic_index) {
@@ -67,21 +65,16 @@ function Model() {
     });
   }, self);
 
-  self.waveMin = ko.pureComputed(function() {
-    return _.min(self.wave(), function(sample) { return sample.y; }).y;
-  }, self);
-
-  self.waveMax = ko.pureComputed(function() {
-    return _.max(self.wave(), function(sample) { return sample.y; }).y;
-  }, self);
-
   self.svgBlob = ko.computed(function() {
+    var waveMin = _.min(self.wave(), function(sample) { return sample.y; }).y;
+    var waveMax = _.max(self.wave(), function(sample) { return sample.y; }).y;
+
     var halfStrokeWidth = self.strokeWidth() / 2;
     var xScale = d3.scale.linear()
       .domain([0, 1])
       .range([halfStrokeWidth, self.width() - halfStrokeWidth]);
     var yScale = d3.scale.linear()
-      .domain([self.waveMin(), self.waveMax()])
+      .domain([waveMin, waveMax])
       .range([halfStrokeWidth, self.height() - halfStrokeWidth]);
     var lineFunction = d3.svg.line()
       .x(function(d) { return xScale(d.x); })
