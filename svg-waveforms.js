@@ -20,6 +20,8 @@ function Model() {
   self.width = ko.observable(800);
   self.height = ko.observable(300);
 
+  self.rounding = ko.observable(10);
+
   self.harmonics = ko.pureComputed(function() {
     var harmonics_count = (self.shape() === 'saw')
       ? self.harmonicCount()
@@ -69,13 +71,13 @@ function Model() {
     var waveMin = _.min(self.wave(), function(sample) { return sample.y; }).y;
     var waveMax = _.max(self.wave(), function(sample) { return sample.y; }).y;
 
-    var halfStrokeWidth = self.strokeWidth() / 2;
+    var margin = self.rounding() / 3 + self.strokeWidth() / 2;
     var xScale = d3.scale.linear()
       .domain([0, 1])
-      .range([halfStrokeWidth, self.width() - halfStrokeWidth]);
+      .range([margin, self.width() - margin]);
     var yScale = d3.scale.linear()
       .domain([waveMin, waveMax])
-      .range([halfStrokeWidth, self.height() - halfStrokeWidth]);
+      .range([margin, self.height() - margin]);
     var lineFunction = d3.svg.line()
       .x(function(d) { return xScale(d.x); })
       .y(function(d) { return yScale(d.y); })
@@ -91,7 +93,9 @@ function Model() {
         .attr("width", self.width())
         .attr("height", self.height())
         .attr("fill", self.backgroundColor())
-        .attr("fill-opacity", self.backgroundOpacity());
+        .attr("fill-opacity", self.backgroundOpacity())
+        .attr("rx", self.rounding())
+        .attr("ry", self.rounding());
     }
 
     svg.append("path")
