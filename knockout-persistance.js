@@ -47,3 +47,19 @@ ko.isComputed = function (instance) {
 
   return ko.isComputed(instance.__ko_proto__); // Walk the prototype chain
 };
+
+ko.reset = function (targetModel, sourceModel) {
+  for (var property in targetModel) {
+    var observable = targetModel[property];
+    if (targetModel.hasOwnProperty(property)
+        && sourceModel.hasOwnProperty(property)
+        && ko.isObservable(observable)
+        && !ko.isComputed(observable)) {
+      var sourceObservable = sourceModel[property];
+      if (sourceObservable) {
+        observable(sourceObservable());
+      }
+    }
+  }
+};
+

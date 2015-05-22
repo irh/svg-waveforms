@@ -123,5 +123,11 @@ $(document).ready(function() {
     self.download_url = window.URL.createObjectURL(model.svgBlob());
     $("#download").attr("href", self.download_url);
   });
+
+  $("#reset").click(function() {
+    if (window.confirm("Are you sure? Click OK to reset.")) {
+      ko.reset(model, new Model());
+    }
+  });
 });
 
