@@ -20,6 +20,7 @@ function Model() {
   self.width = ko.observable(800);
   self.height = ko.observable(300);
 
+  self.margin = ko.observable(0);
   self.rounding = ko.observable(10);
 
   self.harmonics = ko.pureComputed(function() {
@@ -71,7 +72,7 @@ function Model() {
     var waveMin = _.min(self.wave(), function(sample) { return sample.y; }).y;
     var waveMax = _.max(self.wave(), function(sample) { return sample.y; }).y;
 
-    var margin = self.rounding() / 3 + self.strokeWidth() / 2;
+    var margin = parseInt(self.margin()) + self.rounding() / 3 + self.strokeWidth() / 2;
     var xScale = d3.scale.linear()
       .domain([0, 1])
       .range([margin, self.width() - margin]);
