@@ -38,12 +38,12 @@ function Model() {
           };
         case 'square':
           return {
-            amp: (harmonic % 2 == 0) ? 0 : 1.0 / harmonic,
+            amp: (harmonic % 2 === 0) ? 0 : 1.0 / harmonic,
             phase: self.inverted() ? 0 : Math.PI
           };
         case 'triangle':
           return {
-            amp: (harmonic % 2 == 0) ? 0
+            amp: (harmonic % 2 === 0) ? 0
               : Math.pow(-1, Math.floor(harmonic_index / 2))
                 / Math.pow(2 * harmonic, 2),
             phase: self.inverted() ? 0 : Math.PI
@@ -56,7 +56,7 @@ function Model() {
     var sizeX = Math.round(self.width() * self.oversampling());
 
     return _.map(_.range(0, sizeX), function(sample) {
-      var sample_phase = sample / (sizeX - 1)
+      var sample_phase = sample / (sizeX - 1);
       return {
         x: sample_phase,
         y:_.reduce(self.harmonics(), function(memo, harmonic, harmonic_index) {
