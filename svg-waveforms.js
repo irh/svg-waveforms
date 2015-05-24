@@ -116,8 +116,17 @@ function Model() {
 
 $(document).ready(function() {
   var model = new Model();
+
   ko.applyBindings(model);
   ko.persistChanges(model, "model-");
+
+  var urlData = location.search.split('data=')[1]
+  if (urlData !== undefined && urlData !== "") {
+    var urlJson = JSON.parse(LZString.decompressFromEncodedURIComponent(urlData));
+    if (urlJson !== undefined) {
+      ko.reset(model, ko.mapping.fromJSON(urlJson));
+    }
+  }
 
   var self = this;
   self.download_url = null;
@@ -128,6 +137,13 @@ $(document).ready(function() {
     self.download_url = window.URL.createObjectURL(model.svgBlob());
     $("#download").attr("href", self.download_url);
   });
+
+  $("#getlink").click(function() {
+    var json = JSON.stringify(ko.cleanJSON(model));
+    var url = window.location.origin + window.location.pathname
+      + "?data=" + LZString.compressToEncodedURIComponent(json);
+    window.prompt("Copy link to clipboard", url);
+  })
 
   $("#reset").click(function() {
     if (window.confirm("Are you sure? Click OK to reset.")) {

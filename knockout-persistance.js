@@ -48,6 +48,23 @@ ko.isComputed = function (instance) {
   return ko.isComputed(instance.__ko_proto__); // Walk the prototype chain
 };
 
+ko.getComputedProperties = function(model) {
+  var result = [];
+  for (property in model) {
+    var observable = model[property];
+    if (model.hasOwnProperty(property)
+        && ko.isObservable(observable)
+        && ko.isComputed(observable)) {
+      result.push(property);
+    }
+  }
+  return result;
+}
+
+ko.cleanJSON = function(model) {
+  return ko.mapping.toJSON(model, { "ignore": ko.getComputedProperties(model) });
+}
+
 ko.reset = function (targetModel, sourceModel) {
   for (var property in targetModel) {
     var observable = targetModel[property];
