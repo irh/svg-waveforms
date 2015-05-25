@@ -135,7 +135,12 @@ $(document).ready(function() {
       window.URL.revokeObjectURL(self.download_url);
     }
     self.download_url = window.URL.createObjectURL(model.svgBlob());
-    $("#download").attr("href", self.download_url);
+    $("#saveAsSvg").attr("href", self.download_url);
+  });
+
+  $("#saveAsPng").click(function() {
+    var svgNode = $("#wave-svg svg")[0];
+    saveSvgAsPng(svgNode, "wave.png");
   });
 
   $("#getlink").click(function() {

@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.3/lz-string.min.js"></script>
+    <script src="https://cdn.rawgit.com/exupero/saveSvgAsPng/gh-pages/saveSvgAsPng.js"></script>
 
     <script src="knockout-bootstrap.js"></script>
     <script src="knockout-persistance.js"></script>
@@ -112,12 +113,15 @@
             </div>
 
             <div class="row parameters">
-              <a id="download" download="wave.svg">
-                <button "download" type="button" class="btn btn-sm btn-success">
-                  Save
-                  <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span>
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  Save <span class="caret"></span>
                 </button>
-              </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a id="saveAsSvg" href="#" download="wave.svg">Save as SVG</a></li>
+                  <li><a id="saveAsPng" href="#">Save as PNG</a></li>
+                </ul>
+              </div>
               <button id="getlink" type="button" class="btn btn-sm btn-info">
                 Link
                 <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
