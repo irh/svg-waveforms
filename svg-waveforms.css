@@ -28,6 +28,11 @@ input[type="color"] {
   height: 20px;
 }
 
+.btn {
+  /* see http://stackoverflow.com/questions/10577906/how-to-make-my-click-function-work-with-ios */
+  cursor: pointer;
+}
+
 #wave-selector-saw, #wave-selector-square, #wave-selector-triangle {
   background-repeat: no-repeat;
   background-position: center;
